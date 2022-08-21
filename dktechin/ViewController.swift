@@ -13,6 +13,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var heightConstant: NSLayoutConstraint!
     @IBOutlet weak var widthConstant: NSLayoutConstraint!
+    @IBOutlet weak var navi: UINavigationBar!
+    
+    var horizonIndex = 0
+    var verticalIndex = 0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,23 +50,63 @@ class ViewController: UIViewController {
         present(imagePicker, animated: false, completion: nil)
     }
     @IBAction func btnAction(_ sender: Any) {
-        let tagIndex = (sender as! UIButton).tag
+        let tagIndex = (sender as! AnyObject).tag
         
         switch tagIndex {
         case 0:
             print("0")
             break
         case 1:
-            print("1")
+            verticalFlip()
             break
         case 2:
-            print("2")
+            horizonFlip()
             break
         case 3:
             plusAction()
             break
         default:
             print("default")
+        }
+    }
+    
+    func verticalFlip() {
+        if horizonIndex == 0{
+            if verticalIndex == 0 {
+                imageView.transform = CGAffineTransform(scaleX: 1, y: -1);
+                verticalIndex = 1
+            }else {
+                imageView.transform = CGAffineTransform(scaleX: 1, y: 1);
+                verticalIndex = 0
+            }
+        }else {
+            if verticalIndex == 0 {
+                imageView.transform = CGAffineTransform(scaleX: -1, y: -1);
+                verticalIndex = 1
+            }else {
+                imageView.transform = CGAffineTransform(scaleX: -1, y: 1);
+                verticalIndex = 0
+            }
+        }
+    }
+    
+    func horizonFlip() {
+        if verticalIndex == 0 {
+            if horizonIndex == 0 {
+                imageView.transform = CGAffineTransform(scaleX: -1, y: 1);
+                horizonIndex = 1
+            }else {
+                imageView.transform = CGAffineTransform(scaleX: 1, y: 1);
+                horizonIndex = 0
+            }
+        }else {
+            if horizonIndex == 0 {
+                imageView.transform = CGAffineTransform(scaleX: -1, y: -1);
+                horizonIndex = 1
+            }else {
+                imageView.transform = CGAffineTransform(scaleX: 1, y: -1);
+                horizonIndex = 0
+            }
         }
     }
 }
@@ -74,10 +118,7 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
         if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             newImage = possibleImage // 원본 이미지가 있을 경우
         }
-        
         imageView.translatesAutoresizingMaskIntoConstraints = false
-        widthConstant.constant = (newImage?.size.width)!
-        heightConstant.constant = (newImage?.size.height)!
         
         self.imageView.image = newImage // 받아온 이미지를 update
         

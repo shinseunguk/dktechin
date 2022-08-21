@@ -17,17 +17,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="og_img" translatesAutoresizingMaskIntoConstraints="NO" id="eix-sG-doZ">
-                                <rect key="frame" x="57" y="373" width="300" height="150"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="150" id="4xy-g4-j0x"/>
-                                    <constraint firstAttribute="width" constant="300" id="a3q-ea-ehB"/>
-                                </constraints>
+                                <rect key="frame" x="30" y="248" width="354" height="400"/>
                             </imageView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc0-z6-Bnz">
-                                <rect key="frame" x="184" y="323" width="46.5" height="31"/>
+                                <rect key="frame" x="182.5" y="138" width="49.5" height="31"/>
                                 <color key="backgroundColor" systemColor="tintColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.right.fill" catalog="system">
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.up.arrow.down" catalog="system">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
@@ -35,7 +31,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lmo-KA-wsh">
-                                <rect key="frame" x="116" y="323" width="46.5" height="31"/>
+                                <rect key="frame" x="114.5" y="138" width="46.5" height="31"/>
                                 <color key="backgroundColor" systemColor="tintColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrowshape.turn.up.left.fill" catalog="system">
@@ -46,52 +42,49 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8W-He-E7W">
-                                <rect key="frame" x="252" y="323" width="49.5" height="31"/>
+                                <rect key="frame" x="253.5" y="138" width="45" height="31"/>
                                 <color key="backgroundColor" systemColor="tintColor"/>
                                 <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="flip.horizontal.fill" catalog="system">
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left.arrow.right" catalog="system">
                                     <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ljc-3C-czn"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="66g-aE-VkB">
-                                <rect key="frame" x="20" y="792" width="374" height="60"/>
-                                <color key="backgroundColor" systemColor="tintColor"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="60" id="yK1-u0-1ki"/>
-                                </constraints>
-                                <color key="tintColor" systemColor="tintColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" title="사진 추가 / 변경">
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="g2g-xO-N6R"/>
-                                </connections>
-                            </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pyc-ON-J5k">
+                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <items>
+                                    <navigationItem title="사진 crop / flip" id="UFY-yD-buo">
+                                        <barButtonItem key="rightBarButtonItem" tag="3" image="camera.fill" catalog="system" id="pP0-CW-bMm">
+                                            <connections>
+                                                <action selector="btnAction:" destination="BYZ-38-t0r" id="Jze-dA-8Gh"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="eix-sG-doZ" firstAttribute="top" secondItem="vc0-z6-Bnz" secondAttribute="bottom" constant="19" id="1N9-ZR-tbq"/>
+                            <constraint firstItem="Pyc-ON-J5k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2JE-C8-4cJ"/>
+                            <constraint firstItem="Pyc-ON-J5k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7p3-3l-24c"/>
                             <constraint firstItem="S8W-He-E7W" firstAttribute="centerY" secondItem="Lmo-KA-wsh" secondAttribute="centerY" id="8vW-xv-dIz"/>
                             <constraint firstItem="vc0-z6-Bnz" firstAttribute="leading" secondItem="Lmo-KA-wsh" secondAttribute="trailing" constant="21.5" id="Ahg-2p-FG6"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="G9h-0w-ltk"/>
-                            <constraint firstItem="66g-aE-VkB" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="GIH-WV-m8Z"/>
+                            <constraint firstItem="Pyc-ON-J5k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="JvT-8F-ycd"/>
                             <constraint firstItem="S8W-He-E7W" firstAttribute="leading" secondItem="vc0-z6-Bnz" secondAttribute="trailing" constant="21.5" id="K04-3a-T32"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K5c-bh-Cml"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="66g-aE-VkB" secondAttribute="trailing" constant="20" id="Qeg-hI-s5M"/>
+                            <constraint firstAttribute="trailing" secondItem="eix-sG-doZ" secondAttribute="trailing" constant="30" id="MOd-yt-sZ0"/>
+                            <constraint firstItem="vc0-z6-Bnz" firstAttribute="top" secondItem="Pyc-ON-J5k" secondAttribute="bottom" constant="50" id="YC3-y6-wTg"/>
                             <constraint firstItem="vc0-z6-Bnz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="bfW-dE-KhO"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="66g-aE-VkB" secondAttribute="bottom" constant="10" id="oKA-2V-7hW"/>
+                            <constraint firstItem="eix-sG-doZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="qDI-hL-gcv"/>
                             <constraint firstItem="vc0-z6-Bnz" firstAttribute="centerY" secondItem="Lmo-KA-wsh" secondAttribute="centerY" id="xoX-ao-IWp"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="heightConstant" destination="4xy-g4-j0x" id="yn1-NM-aSI"/>
                         <outlet property="imageView" destination="eix-sG-doZ" id="hXa-Eo-Qq6"/>
-                        <outlet property="widthConstant" destination="a3q-ea-ehB" id="COv-jD-QHH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -100,9 +93,10 @@
         </scene>
     </scenes>
     <resources>
+        <image name="arrow.left.arrow.right" catalog="system" width="119" height="128"/>
+        <image name="arrow.up.arrow.down" catalog="system" width="128" height="98"/>
         <image name="arrowshape.turn.up.left.fill" catalog="system" width="128" height="106"/>
-        <image name="arrowshape.turn.up.right.fill" catalog="system" width="128" height="106"/>
-        <image name="flip.horizontal.fill" catalog="system" width="128" height="112"/>
+        <image name="camera.fill" catalog="system" width="128" height="94"/>
         <image name="og_img" width="800" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
