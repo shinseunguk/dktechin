@@ -11,10 +11,6 @@ class ViewController: UIViewController {
     let imagePicker = UIImagePickerController()
     @IBOutlet weak var imageView: UIImageView!
     
-    @IBOutlet weak var heightConstant: NSLayoutConstraint!
-    @IBOutlet weak var widthConstant: NSLayoutConstraint!
-    @IBOutlet weak var navi: UINavigationBar!
-    
     var horizonIndex = 0
     var verticalIndex = 0
     
