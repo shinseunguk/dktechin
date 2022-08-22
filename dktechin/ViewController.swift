@@ -25,7 +25,6 @@ class ViewController: UIViewController {
         self.imagePicker.sourceType = .photoLibrary
         self.imagePicker.delegate = self // picker delegate
         self.imagePicker.sourceType = .photoLibrary // 앨범에서 가져옴
-        self.imagePicker.allowsEditing = false // 수정 가능 여부
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -35,20 +34,32 @@ class ViewController: UIViewController {
     func plusAction() {
         let alert =  UIAlertController(title: "사진 추가 / 변경", message: nil, preferredStyle: .actionSheet)
 
-        let library =  UIAlertAction(title: "앨범", style: .default) {
-            (action) in self.openLibrary()
+        let library1 =  UIAlertAction(title: "Select Original Image", style: .default) {
+            (action) in self.openLibrary(index: 1)
+        }
+        
+        let library2 =  UIAlertAction(title: "Select Crop Image", style: .default) {
+            (action) in self.openLibrary(index: 2)
         }
 
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
-        alert.addAction(library)
-//        alert.addAction(camera)
+        alert.addAction(library1)
+        alert.addAction(library2)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
     
-    func openLibrary(){
+    func openLibrary(index : Int){
+        // 수정 가능 여부
+        if index == 1 {
+            self.imagePicker.allowsEditing = false
+        }else {
+            self.imagePicker.allowsEditing = true
+        }
+        
         present(imagePicker, animated: false, completion: nil)
     }
+    
     @IBAction func btnAction(_ sender: Any) {
         let tagIndex = (sender as! AnyObject).tag
         
@@ -115,10 +126,18 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var newImage: UIImage? = nil // update 할 이미지
         
-        if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+        if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
+                    newImage = possibleImage // 수정된 이미지가 있을 경우
+        } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             newImage = possibleImage // 원본 이미지가 있을 경우
         }
+        
         imageView.translatesAutoresizingMaskIntoConstraints = false
+        
+        //flip한 이미지들 제자리로 초기화
+        imageView.transform = CGAffineTransform(scaleX: 1, y: 1);
+        horizonIndex = 0
+        verticalIndex = 0
         
         self.imageView.image = newImage // 받아온 이미지를 update
         
