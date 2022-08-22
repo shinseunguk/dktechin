@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <device id="retina6_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,14 +13,17 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="dktechin" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="og_img" translatesAutoresizingMaskIntoConstraints="NO" id="eix-sG-doZ">
-                                <rect key="frame" x="30" y="248" width="354" height="400"/>
+                                <rect key="frame" x="30" y="313" width="368" height="300"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="300" id="pN4-VU-K5l"/>
+                                </constraints>
                             </imageView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc0-z6-Bnz">
-                                <rect key="frame" x="137.5" y="197" width="49.5" height="31"/>
+                                <rect key="frame" x="135" y="262" width="49" height="31"/>
                                 <color key="backgroundColor" systemColor="tintColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrow.up.arrow.down" catalog="system">
@@ -31,7 +34,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8W-He-E7W">
-                                <rect key="frame" x="227" y="197" width="45" height="31"/>
+                                <rect key="frame" x="244" y="262" width="45" height="31"/>
                                 <color key="backgroundColor" systemColor="tintColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrow.left.arrow.right" catalog="system">
@@ -42,7 +45,7 @@
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pyc-ON-J5k">
-                                <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                                <rect key="frame" x="0.0" y="44" width="428" height="44"/>
                                 <items>
                                     <navigationItem title="사진 crop / flip" id="UFY-yD-buo">
                                         <barButtonItem key="rightBarButtonItem" tag="3" image="camera.fill" catalog="system" id="pP0-CW-bMm">
@@ -53,11 +56,12 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="oAj-nT-20S">
-                                <rect key="frame" x="207" y="136" width="0.0" height="34"/>
-                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9G-T2-INM">
+                                <rect key="frame" x="214" y="262" width="0.0" height="31"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" id="wU2-FF-aDU"/>
+                                    <constraint firstAttribute="width" id="MrP-Il-9L4"/>
+                                    <constraint firstAttribute="height" constant="31" id="luT-I1-4ah"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -66,16 +70,17 @@
                         <constraints>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2JE-C8-4cJ"/>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7p3-3l-24c"/>
+                            <constraint firstItem="o9G-T2-INM" firstAttribute="leading" secondItem="vc0-z6-Bnz" secondAttribute="trailing" constant="30" id="CC5-fM-Dxp"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="G9h-0w-ltk"/>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="JvT-8F-ycd"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K5c-bh-Cml"/>
+                            <constraint firstItem="o9G-T2-INM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K9d-bz-lsk"/>
                             <constraint firstAttribute="trailing" secondItem="eix-sG-doZ" secondAttribute="trailing" constant="30" id="MOd-yt-sZ0"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="top" secondItem="S8W-He-E7W" secondAttribute="bottom" constant="20" id="Rxq-hk-sO5"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="top" secondItem="vc0-z6-Bnz" secondAttribute="bottom" constant="20" id="YFh-xz-bX2"/>
-                            <constraint firstItem="oAj-nT-20S" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="dxu-ea-7Rt"/>
-                            <constraint firstItem="S8W-He-E7W" firstAttribute="leading" secondItem="oAj-nT-20S" secondAttribute="trailing" constant="20" id="gUK-Vu-y8F"/>
-                            <constraint firstItem="oAj-nT-20S" firstAttribute="leading" secondItem="vc0-z6-Bnz" secondAttribute="trailing" constant="20" id="j8J-21-dVk"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="qDI-hL-gcv"/>
+                            <constraint firstItem="eix-sG-doZ" firstAttribute="top" secondItem="o9G-T2-INM" secondAttribute="bottom" constant="20" id="t23-w0-2dx"/>
+                            <constraint firstItem="S8W-He-E7W" firstAttribute="leading" secondItem="o9G-T2-INM" secondAttribute="trailing" constant="30" id="yoo-Tu-1Co"/>
                         </constraints>
                     </view>
                     <connections>
@@ -84,7 +89,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="34.782608695652179" y="63.616071428571423"/>
+            <point key="canvasLocation" x="33.644859813084111" y="63.498920086393092"/>
         </scene>
     </scenes>
     <resources>
