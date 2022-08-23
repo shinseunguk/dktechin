@@ -20,6 +20,10 @@ class ViewController: UIViewController {
     var horizonIndex = 0
     var verticalIndex = 0
     
+    var leftMenuItem: UIBarButtonItem {
+        let leftMenuItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(btnAction(_:)))
+        return leftMenuItem
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +55,7 @@ class ViewController: UIViewController {
         present(imagePicker, animated: false, completion: nil)
     }
     
+    @objc
     @IBAction func btnAction(_ sender: Any) {
         let tagIndex = (sender as! AnyObject).tag
         
@@ -127,7 +132,13 @@ class ViewController: UIViewController {
     
     func buttonHidden(TF : Bool){
         if TF { // start Crop
+            // Change tag
             rigthBtn.tag = 4
+            
+            // add Left Bar Item
+            leftMenuItem.image = UIImage(systemName: "xmark") // 수정필요
+            navBar.topItem?.setLeftBarButton(self.leftMenuItem, animated: false);
+            
             // button hidden
             btn0.isHidden = TF
             btn1.isHidden = TF
@@ -146,10 +157,10 @@ class ViewController: UIViewController {
             btn2.isHidden = TF
             
             // change navi title
-            navBar.topItem!.title = "사진 자르기"
+            navBar.topItem!.title = "사진 crop / flip"
             
             // change navi Item
-            rigthBtn.image = UIImage(systemName: "checkmark")
+            rigthBtn.image = UIImage(systemName: "camera")
         }
         
     }
