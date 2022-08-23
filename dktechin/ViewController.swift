@@ -16,22 +16,48 @@ class ViewController: UIViewController {
     @IBOutlet weak var btn2: UIButton!
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var navBar: UINavigationBar!
+    @IBOutlet weak var descriptionLabel: UILabel!
     
     var horizonIndex = 0
     var verticalIndex = 0
     
     var leftMenuItem: UIBarButtonItem {
-        let leftMenuItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(btnAction(_:)))
+        let leftMenuItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(btnAction(_:)))
+        leftMenuItem.tag = 5
         return leftMenuItem
+    }
+    
+    var cropRectengle: UIView {
+        let cropRectengle = UIView()
+        cropRectengle.translatesAutoresizingMaskIntoConstraints = false
+        cropRectengle.widthAnchor.constraint(equalToConstant: imageView.layer.frame.width).isActive = true
+        cropRectengle.heightAnchor.constraint(equalToConstant: imageView.layer.frame.height).isActive = true
+        cropRectengle.backgroundColor = .clear
+        cropRectengle.layer.borderWidth = 3
+        cropRectengle.layer.borderColor = UIColor.white.cgColor
+//        cropRectengle.addGestureRecognizer(gesture)
+        return cropRectengle
+    }
+    
+    var cropCornerBtn: UIButton {
+        let cropCornerBtn = UIButton()
+        cropCornerBtn.translatesAutoresizingMaskIntoConstraints = false
+        cropCornerBtn.widthAnchor.constraint(equalToConstant: 6000).isActive = true
+        cropCornerBtn.heightAnchor.constraint(equalToConstant: 6000).isActive = true
+        cropCornerBtn.backgroundColor = .red
+        return cropCornerBtn
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageView.tag = 6
+        
         //imagePicker setup
         self.imagePicker.delegate = self // picker delegate
         self.imagePicker.allowsEditing = false
         self.imagePicker.sourceType = .photoLibrary // 앨범에서 가져옴
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -60,30 +86,28 @@ class ViewController: UIViewController {
         let tagIndex = (sender as! AnyObject).tag
         
         switch tagIndex {
-        case 0:
-            cropImage()
+        case 0: // button hidden true
+            buttonHidden(TF: true)
             break
-        case 1:
+        case 1: // 상하 flip onclick method
             verticalFlip()
             break
-        case 2:
+        case 2: // 좌우 flip onclick method
             horizonFlip()
             break
-        case 3:
+        case 3: // 사진 추가 / 변경
             plusAction()
             break
-        case 4:
+        case 4: // 카메라 클릭이후 체크 버튼 변경후 onclick method
             checkAction()
             break
+        case 5: // button hidden false
+            buttonHidden(TF: false)
+        case 6:
+            print("dd")
         default:
             print("default")
         }
-    }
-    
-    func cropImage() {
-        // button hidden, 오른쪽 상단 체크 버튼, 왼쪽 상단 x버튼
-        print(#function)
-        buttonHidden(TF: true)
     }
     
     func verticalFlip() {
@@ -136,7 +160,7 @@ class ViewController: UIViewController {
             rigthBtn.tag = 4
             
             // add Left Bar Item
-            leftMenuItem.image = UIImage(systemName: "xmark") // 수정필요
+//            navBar.topItem?.leftBarButtonItem?.image = UIImage(systemName: "xmark") // 수정필요
             navBar.topItem?.setLeftBarButton(self.leftMenuItem, animated: false);
             
             // button hidden
@@ -149,6 +173,15 @@ class ViewController: UIViewController {
             
             // change navi Item
             rigthBtn.image = UIImage(systemName: "checkmark")
+            
+            imageView.addSubview(cropRectengle)
+            view.backgroundColor = .gray
+
+            let tapGR = UITapGestureRecognizer(target: self, action: #selector(imageViewTouch(gestureRecognizer: )))
+            imageView.addGestureRecognizer(tapGR)
+            imageView.isUserInteractionEnabled = true
+            
+            descriptionLabel.isHidden = false
         }else {
             rigthBtn.tag = 3
             // button hidden
@@ -158,11 +191,28 @@ class ViewController: UIViewController {
             
             // change navi title
             navBar.topItem!.title = "사진 crop / flip"
+            navBar.topItem?.leftBarButtonItem = nil
             
             // change navi Item
             rigthBtn.image = UIImage(systemName: "camera")
+            view.backgroundColor = .white
+            
+            descriptionLabel.isHidden = true
         }
         
+    }
+    @objc func imageViewTouch(gestureRecognizer: UITapGestureRecognizer) {
+        print(gestureRecognizer)
+        if gestureRecognizer.state == UIGestureRecognizer.State.recognized
+                {
+                    let location = gestureRecognizer.location(in: gestureRecognizer.view)
+                    print(gestureRecognizer.location(in: gestureRecognizer.view))
+                    
+                    let testView = UIView(frame: CGRect(x: location.x, y: location.y, width:  5, height: 5))
+                    testView.backgroundColor = UIColor.white
+                    self.imageView.addSubview(testView)
+        //            view.reloadInputViews()
+                }
     }
 }
 

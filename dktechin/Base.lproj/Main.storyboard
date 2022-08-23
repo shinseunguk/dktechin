@@ -67,18 +67,28 @@
                                     <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ljc-3C-czn"/>
                                 </connections>
                             </button>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="자르실 첫번째 모서리 터치" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HiP-96-Rw3">
+                                <rect key="frame" x="80" y="190" width="268" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="vc0-z6-Bnz" firstAttribute="leading" secondItem="OH5-Ry-tPh" secondAttribute="trailing" constant="30" id="0yz-P8-4eP"/>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2JE-C8-4cJ"/>
+                            <constraint firstItem="HiP-96-Rw3" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="3Eg-SD-LTD"/>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7p3-3l-24c"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="G9h-0w-ltk"/>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="JvT-8F-ycd"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K5c-bh-Cml"/>
                             <constraint firstAttribute="trailing" secondItem="eix-sG-doZ" secondAttribute="trailing" constant="30" id="MOd-yt-sZ0"/>
+                            <constraint firstItem="HiP-96-Rw3" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="80" id="PKH-la-PFf"/>
                             <constraint firstItem="S8W-He-E7W" firstAttribute="leading" secondItem="vc0-z6-Bnz" secondAttribute="trailing" constant="30" id="Zy1-q9-nk7"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="HiP-96-Rw3" secondAttribute="trailing" constant="80" id="g29-Ov-K2n"/>
+                            <constraint firstItem="vc0-z6-Bnz" firstAttribute="top" secondItem="HiP-96-Rw3" secondAttribute="bottom" constant="50" id="gkf-Je-Iff"/>
                             <constraint firstItem="vc0-z6-Bnz" firstAttribute="centerY" secondItem="OH5-Ry-tPh" secondAttribute="centerY" id="hbS-gF-a7B"/>
                             <constraint firstItem="vc0-z6-Bnz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nux-yG-Wlb"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="qDI-hL-gcv"/>
@@ -90,6 +100,7 @@
                         <outlet property="btn0" destination="OH5-Ry-tPh" id="Hhe-3l-EsS"/>
                         <outlet property="btn1" destination="vc0-z6-Bnz" id="kC2-6W-zbf"/>
                         <outlet property="btn2" destination="S8W-He-E7W" id="tT1-V9-NQ2"/>
+                        <outlet property="descriptionLabel" destination="HiP-96-Rw3" id="eVI-ex-rGd"/>
                         <outlet property="imageView" destination="eix-sG-doZ" id="hXa-Eo-Qq6"/>
                         <outlet property="navBar" destination="Pyc-ON-J5k" id="hQG-ef-Rz5"/>
                         <outlet property="rigthBtn" destination="pP0-CW-bMm" id="h1a-DL-jgj"/>
