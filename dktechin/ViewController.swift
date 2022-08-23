@@ -5,21 +5,28 @@
 //  Created by ukBook on 2022/08/20.
 //
 
+import Foundation
 import UIKit
 
 class ViewController: UIViewController {
     let imagePicker = UIImagePickerController()
+    @IBOutlet weak var rigthBtn: UIBarButtonItem!
+    @IBOutlet weak var btn0: UIButton!
+    @IBOutlet weak var btn1: UIButton!
+    @IBOutlet weak var btn2: UIButton!
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     var horizonIndex = 0
     var verticalIndex = 0
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         //imagePicker setup
-        self.imagePicker.sourceType = .photoLibrary
         self.imagePicker.delegate = self // picker delegate
+        self.imagePicker.allowsEditing = false
         self.imagePicker.sourceType = .photoLibrary // 앨범에서 가져옴
     }
     
@@ -30,29 +37,17 @@ class ViewController: UIViewController {
     func plusAction() {
         let alert =  UIAlertController(title: "사진 추가 / 변경", message: nil, preferredStyle: .actionSheet)
 
-        let library1 =  UIAlertAction(title: "Select Original Image", style: .default) {
-            (action) in self.openLibrary(index: 1)
-        }
-        
-        let library2 =  UIAlertAction(title: "Select Crop Image", style: .default) {
-            (action) in self.openLibrary(index: 2)
+        let library1 =  UIAlertAction(title: "사진 추가 / 변경", style: .default) {
+            (action) in self.openLibrary()
         }
 
         let cancel = UIAlertAction(title: "취소", style: .cancel, handler: nil)
         alert.addAction(library1)
-        alert.addAction(library2)
         alert.addAction(cancel)
         present(alert, animated: true, completion: nil)
     }
     
-    func openLibrary(index : Int){
-        // 수정 가능 여부
-        if index == 1 {
-            self.imagePicker.allowsEditing = false
-        }else {
-            self.imagePicker.allowsEditing = true
-        }
-        
+    func openLibrary(){
         present(imagePicker, animated: false, completion: nil)
     }
     
@@ -61,7 +56,7 @@ class ViewController: UIViewController {
         
         switch tagIndex {
         case 0:
-            print("0")
+            cropImage()
             break
         case 1:
             verticalFlip()
@@ -72,9 +67,18 @@ class ViewController: UIViewController {
         case 3:
             plusAction()
             break
+        case 4:
+            checkAction()
+            break
         default:
             print("default")
         }
+    }
+    
+    func cropImage() {
+        // button hidden, 오른쪽 상단 체크 버튼, 왼쪽 상단 x버튼
+        print(#function)
+        buttonHidden(TF: true)
     }
     
     func verticalFlip() {
@@ -115,6 +119,39 @@ class ViewController: UIViewController {
                 horizonIndex = 0
             }
         }
+    }
+    
+    func checkAction() {
+        buttonHidden(TF: false)
+    }
+    
+    func buttonHidden(TF : Bool){
+        if TF { // start Crop
+            rigthBtn.tag = 4
+            // button hidden
+            btn0.isHidden = TF
+            btn1.isHidden = TF
+            btn2.isHidden = TF
+            
+            // change navi title
+            navBar.topItem!.title = "사진 자르기"
+            
+            // change navi Item
+            rigthBtn.image = UIImage(systemName: "checkmark")
+        }else {
+            rigthBtn.tag = 3
+            // button hidden
+            btn0.isHidden = TF
+            btn1.isHidden = TF
+            btn2.isHidden = TF
+            
+            // change navi title
+            navBar.topItem!.title = "사진 자르기"
+            
+            // change navi Item
+            rigthBtn.image = UIImage(systemName: "checkmark")
+        }
+        
     }
 }
 

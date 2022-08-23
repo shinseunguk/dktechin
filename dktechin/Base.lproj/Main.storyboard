@@ -16,14 +16,14 @@
                         <rect key="frame" x="0.0" y="0.0" width="428" height="926"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="og_img" translatesAutoresizingMaskIntoConstraints="NO" id="eix-sG-doZ">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="og_img" translatesAutoresizingMaskIntoConstraints="NO" id="eix-sG-doZ">
                                 <rect key="frame" x="30" y="313" width="368" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="300" id="pN4-VU-K5l"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vc0-z6-Bnz">
-                                <rect key="frame" x="135" y="262" width="49" height="31"/>
+                                <rect key="frame" x="189.66666666666666" y="261" width="49" height="31"/>
                                 <color key="backgroundColor" systemColor="tintColor"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" image="arrow.up.arrow.down" catalog="system">
@@ -31,17 +31,6 @@
                                 </buttonConfiguration>
                                 <connections>
                                     <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="CGM-xL-n0k"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8W-He-E7W">
-                                <rect key="frame" x="244" y="262" width="45" height="31"/>
-                                <color key="backgroundColor" systemColor="tintColor"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain" image="arrow.left.arrow.right" catalog="system">
-                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </buttonConfiguration>
-                                <connections>
-                                    <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ljc-3C-czn"/>
                                 </connections>
                             </button>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Pyc-ON-J5k">
@@ -56,35 +45,54 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o9G-T2-INM">
-                                <rect key="frame" x="214" y="262" width="0.0" height="31"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" id="MrP-Il-9L4"/>
-                                    <constraint firstAttribute="height" constant="31" id="luT-I1-4ah"/>
-                                </constraints>
-                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OH5-Ry-tPh">
+                                <rect key="frame" x="111.66666666666669" y="261" width="48" height="31"/>
+                                <color key="backgroundColor" systemColor="tintColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="crop" catalog="system">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="njK-Uh-aKl"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S8W-He-E7W">
+                                <rect key="frame" x="268.66666666666669" y="261" width="45" height="31"/>
+                                <color key="backgroundColor" systemColor="tintColor"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain" image="arrow.left.arrow.right" catalog="system">
+                                    <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </buttonConfiguration>
+                                <connections>
+                                    <action selector="btnAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ljc-3C-czn"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
+                            <constraint firstItem="vc0-z6-Bnz" firstAttribute="leading" secondItem="OH5-Ry-tPh" secondAttribute="trailing" constant="30" id="0yz-P8-4eP"/>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="2JE-C8-4cJ"/>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="7p3-3l-24c"/>
-                            <constraint firstItem="o9G-T2-INM" firstAttribute="leading" secondItem="vc0-z6-Bnz" secondAttribute="trailing" constant="30" id="CC5-fM-Dxp"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="G9h-0w-ltk"/>
                             <constraint firstItem="Pyc-ON-J5k" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="JvT-8F-ycd"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K5c-bh-Cml"/>
-                            <constraint firstItem="o9G-T2-INM" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="K9d-bz-lsk"/>
                             <constraint firstAttribute="trailing" secondItem="eix-sG-doZ" secondAttribute="trailing" constant="30" id="MOd-yt-sZ0"/>
-                            <constraint firstItem="eix-sG-doZ" firstAttribute="top" secondItem="S8W-He-E7W" secondAttribute="bottom" constant="20" id="Rxq-hk-sO5"/>
-                            <constraint firstItem="eix-sG-doZ" firstAttribute="top" secondItem="vc0-z6-Bnz" secondAttribute="bottom" constant="20" id="YFh-xz-bX2"/>
+                            <constraint firstItem="S8W-He-E7W" firstAttribute="leading" secondItem="vc0-z6-Bnz" secondAttribute="trailing" constant="30" id="Zy1-q9-nk7"/>
+                            <constraint firstItem="vc0-z6-Bnz" firstAttribute="centerY" secondItem="OH5-Ry-tPh" secondAttribute="centerY" id="hbS-gF-a7B"/>
+                            <constraint firstItem="vc0-z6-Bnz" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="nux-yG-Wlb"/>
                             <constraint firstItem="eix-sG-doZ" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="qDI-hL-gcv"/>
-                            <constraint firstItem="eix-sG-doZ" firstAttribute="top" secondItem="o9G-T2-INM" secondAttribute="bottom" constant="20" id="t23-w0-2dx"/>
-                            <constraint firstItem="S8W-He-E7W" firstAttribute="leading" secondItem="o9G-T2-INM" secondAttribute="trailing" constant="30" id="yoo-Tu-1Co"/>
+                            <constraint firstItem="S8W-He-E7W" firstAttribute="centerY" secondItem="OH5-Ry-tPh" secondAttribute="centerY" id="w9y-BG-bmj"/>
+                            <constraint firstItem="eix-sG-doZ" firstAttribute="top" secondItem="vc0-z6-Bnz" secondAttribute="bottom" constant="21" id="x1W-h2-sYf"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="btn0" destination="OH5-Ry-tPh" id="Hhe-3l-EsS"/>
+                        <outlet property="btn1" destination="vc0-z6-Bnz" id="kC2-6W-zbf"/>
+                        <outlet property="btn2" destination="S8W-He-E7W" id="tT1-V9-NQ2"/>
                         <outlet property="imageView" destination="eix-sG-doZ" id="hXa-Eo-Qq6"/>
+                        <outlet property="navBar" destination="Pyc-ON-J5k" id="hQG-ef-Rz5"/>
+                        <outlet property="rigthBtn" destination="pP0-CW-bMm" id="h1a-DL-jgj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -96,6 +104,7 @@
         <image name="arrow.left.arrow.right" catalog="system" width="119" height="128"/>
         <image name="arrow.up.arrow.down" catalog="system" width="128" height="98"/>
         <image name="camera.fill" catalog="system" width="128" height="94"/>
+        <image name="crop" catalog="system" width="128" height="116"/>
         <image name="og_img" width="800" height="400"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
