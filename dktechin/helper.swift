@@ -25,6 +25,8 @@ extension UIImageView {
 
     func convertToImageCoordinates(_ rect: CGRect) -> CGRect? {
         guard let image = image else { return nil }
+        print("\(#function) ",image.size.width)
+        print("\(#function) ",image.size.height)
 
         let imageSize = CGSize(width: image.size.width, height: image.size.height)
         let imageCenter = CGPoint(x: imageSize.width / 2, y: imageSize.height / 2)
@@ -37,6 +39,7 @@ extension UIImageView {
         switch contentMode {
         case .scaleToFill:
             scale = CGPoint(x: imageSize.width / bounds.width, y: imageSize.height / bounds.height)
+            print("1!")
 
         case .scaleAspectFit:
             let value: CGFloat
@@ -46,7 +49,7 @@ extension UIImageView {
                 value = imageSize.width / bounds.width
             }
             scale = CGPoint(x: value, y: value)
-
+            print("2!")
         case .scaleAspectFill:
             let value: CGFloat
             if imageRatio > imageViewRatio {
@@ -55,23 +58,13 @@ extension UIImageView {
                 value = imageSize.width / bounds.width
             }
             scale = CGPoint(x: value, y: value)
-
+            print("3!")
         case .center:
             scale = CGPoint(x: 1, y: 1)
-
-        // unhandled cases include
-        // case .redraw:
-        // case .top:
-        // case .bottom:
-        // case .left:
-        // case .right:
-        // case .topLeft:
-        // case .topRight:
-        // case .bottomLeft:
-        // case .bottomRight:
-
+            print("4!")
         default:
             fatalError("Unexpected contentMode")
+            print("5!")
         }
 
         var rect = rect

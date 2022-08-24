@@ -20,8 +20,6 @@ class ViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var descriptionLabel: UILabel!
     
-    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     // 초기 터치값
     var recLeftTopX : CGFloat = 0.0
     var recLeftTopY : CGFloat = 0.0
@@ -146,7 +144,7 @@ class ViewController: UIViewController {
         case 5: // button hidden false
             buttonHidden(TF: false)
         case 6:
-            print("dd")
+            print("case 6")
         default:
             print("default")
         }
@@ -201,8 +199,6 @@ class ViewController: UIViewController {
             // Change tag
             rigthBtn.tag = 4
             
-            // add Left Bar Item
-//            navBar.topItem?.leftBarButtonItem?.image = UIImage(systemName: "xmark") // 수정필요
             navBar.topItem?.setLeftBarButton(self.leftMenuItem, animated: false);
             
             // button hidden
@@ -255,7 +251,6 @@ class ViewController: UIViewController {
             
             //label reset
             descriptionLabel.text = "자르실 첫번째 모서리 터치"
-            
             enableTouch = false
         }
         
@@ -268,10 +263,10 @@ class ViewController: UIViewController {
                             
                         let location = gestureRecognizer.location(in: gestureRecognizer.view)
                         
-                        testView0 = UIView(frame: CGRect(x: location.x, y: location.y, width:  5000, height: 2))
-                        testView1 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -5000, height: 2))
-                        testView2 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 5000))
-                        testView3 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -5000))
+                        testView0 = UIView(frame: CGRect(x: location.x, y: location.y, width:  400, height: 2))
+                        testView1 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -400, height: 2))
+                        testView2 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 800))
+                        testView3 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -800))
                         
                         testView0.backgroundColor = UIColor.white
                         testView1.backgroundColor = UIColor.white
@@ -286,7 +281,7 @@ class ViewController: UIViewController {
                         recLeftTopX = location.x
                         recLeftTopY = location.y
                         
-                        descriptionLabel.text = "두번째 대각선 모서리 터치"
+                        descriptionLabel.text = "나머지 대각선 모서리 터치"
                     }
                 }else if touchIndex == 1 {
                     if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
@@ -321,6 +316,8 @@ class ViewController: UIViewController {
                         
                         print("recWidth ", Int(recWidth)) // 사각형 너비
                         print("recHeight ", Int(recHeight)) // 사각형 높이
+                        
+                        descriptionLabel.text = "취소 : Cancel / 적용 : 체크버튼"
                     }
                 }
                 touchIndex += 1
@@ -329,29 +326,7 @@ class ViewController: UIViewController {
     }
     
     func workCrop() {
-//        let xOffset = (imageView.size.width - sideLength) / 2.0
-//        let yOffset = (sourceSize.height - sideLength) / 2.0
-        
-        print(imageView.frame.width) // 400
-        print((imageView.image?.size.width)!) // 800
-        
-        var divW = (imageView.image?.size.width)! / imageView.frame.width
-        var divH = (imageView.image?.size.height)! / imageView.frame.height
-        
-        print("divW....1 ",divW)
-        print("divH....1 ",divH)
-        
-        var asd = UIView(frame : CGRect(x: Int(recLeftTopX), y: Int(recLeftTopY), width: Int(recWidth), height: Int(recHeight)))
-        
-        asd.backgroundColor = .blue
-        
-//        let cropRect = CGRect(x: Int(recLeftTopX), y: Int(recLeftTopY), width: Int(recWidth), height: Int(recHeight))
-        let cropRect = CGRect(x: recLeftTopX * divW, y: recLeftTopY * divH, width: recWidth * divW, height: recHeight * divH)
-        let imageRef = imageView.image!.cgImage!.cropping(to: cropRect);
-        let newImage = UIImage(cgImage: imageRef!, scale: imageView.image!.scale, orientation: imageView.image!.imageOrientation)
-
-        imageView.image = newImage
-//        imageView.addSubview(asd)
+        imageView.image = imageView.image(at: CGRect(x: recLeftTopX, y: recLeftTopY, width: recWidth, height: recHeight))
     }
 }
 
@@ -369,29 +344,6 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
         imageView.transform = CGAffineTransform(scaleX: 1, y: 1);
         horizonIndex = 0
         verticalIndex = 0
-        
-        var ahrt = (newImage?.size.width)! / 2
-        
-        print(ahrt)
-        
-        var divW = (newImage?.size.width)! / imageView.frame.width
-        var divH = (newImage?.size.height)! / imageView.frame.height
-        
-        print((newImage?.size.width)!)
-        print(imageView.frame.width)
-        print(div)
-        
-        print("ddd1", (newImage?.size.width)! / divW)
-        print("ddd2", (newImage?.size.width)! / divH)
-        
-        
-//        imageView.widthAnchor.constraint(equalToConstant: (newImage?.size.width)!).isActive = true
-//        imageView.heightAnchor.constraint(equalToConstant: (newImage?.size.height)!).isActive = true
-//        widthConstraint.constant = (newImage?.size.width)! / divW
-//        widthConstraint.isActive = true
-//
-//        heightConstraint.constant = (newImage?.size.height)! / divH
-//        heightConstraint.isActive = true
         
         self.imageView.image = newImage // 받아온 이미지를 update
         
