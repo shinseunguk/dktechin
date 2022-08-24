@@ -56,17 +56,13 @@ class ViewController: UIViewController {
     var testView6 = UIView()
     var testView7 = UIView()
     
-    
-    
-    
-    
-    var leftMenuItem: UIBarButtonItem {
+    var leftMenuItem: UIBarButtonItem { // 좌상단 네비게이션 아이템
         let leftMenuItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(btnAction(_:)))
         leftMenuItem.tag = 5
         return leftMenuItem
     }
     
-    var cropRectengle: UIView {
+    var cropRectengle: UIView { // crop시 imageview 영역표시
         let cropRectengle = UIView()
         cropRectengle.translatesAutoresizingMaskIntoConstraints = false
         cropRectengle.widthAnchor.constraint(equalToConstant: imageView.layer.frame.width).isActive = true
@@ -74,17 +70,7 @@ class ViewController: UIViewController {
         cropRectengle.backgroundColor = .clear
         cropRectengle.layer.borderWidth = 3
         cropRectengle.layer.borderColor = UIColor.white.cgColor
-//        cropRectengle.addGestureRecognizer(gesture)
         return cropRectengle
-    }
-    
-    var cropCornerBtn: UIButton {
-        let cropCornerBtn = UIButton()
-        cropCornerBtn.translatesAutoresizingMaskIntoConstraints = false
-        cropCornerBtn.widthAnchor.constraint(equalToConstant: 6000).isActive = true
-        cropCornerBtn.heightAnchor.constraint(equalToConstant: 6000).isActive = true
-        cropCornerBtn.backgroundColor = .red
-        return cropCornerBtn
     }
     
     override func viewDidLoad() {
@@ -96,14 +82,13 @@ class ViewController: UIViewController {
         self.imagePicker.delegate = self // picker delegate
         self.imagePicker.allowsEditing = false
         self.imagePicker.sourceType = .photoLibrary // 앨범에서 가져옴
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        plusAction()
+        plusAction() // 화면 진입시 Device 갤러리 진입 actionSheet alert 노출
     }
     
-    func plusAction() {
+    func plusAction() { // actionSheet alert => 사진 추가 / 변경
         let alert =  UIAlertController(title: "사진 추가 / 변경", message: nil, preferredStyle: .actionSheet)
 
         let library1 =  UIAlertAction(title: "사진 추가 / 변경", style: .default) {
@@ -116,12 +101,12 @@ class ViewController: UIViewController {
         present(alert, animated: true, completion: nil)
     }
     
-    func openLibrary(){
+    func openLibrary(){ // 앨범 open
         present(imagePicker, animated: false, completion: nil)
     }
     
     @objc
-    @IBAction func btnAction(_ sender: Any) {
+    @IBAction func btnAction(_ sender: Any) { // btn Action
         let tagIndex = (sender as! AnyObject).tag
         
         switch tagIndex {
@@ -138,7 +123,7 @@ class ViewController: UIViewController {
             plusAction()
             break
         case 4: // 카메라 클릭이후 체크 버튼 변경후 onclick method
-            checkAction()
+            buttonHidden(TF: false)
             workCrop()
             break
         case 5: // button hidden false
@@ -150,7 +135,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func verticalFlip() {
+    func verticalFlip() { // 상하 flip onclick method
         if horizonIndex == 0{
             if verticalIndex == 0 {
                 imageView.transform = CGAffineTransform(scaleX: 1, y: -1);
@@ -170,7 +155,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func horizonFlip() {
+    func horizonFlip() { // 좌우 flip onclick method
         if verticalIndex == 0 {
             if horizonIndex == 0 {
                 imageView.transform = CGAffineTransform(scaleX: -1, y: 1);
@@ -190,21 +175,18 @@ class ViewController: UIViewController {
         }
     }
     
-    func checkAction() {
-        buttonHidden(TF: false)
-    }
-    
     func buttonHidden(TF : Bool){
+        // button hidden
+        btn0.isHidden = TF
+        btn1.isHidden = TF
+        btn2.isHidden = TF
+        
         if TF { // start Crop
             // Change tag
             rigthBtn.tag = 4
             
+            // 네비게이션 좌상단 item set
             navBar.topItem?.setLeftBarButton(self.leftMenuItem, animated: false);
-            
-            // button hidden
-            btn0.isHidden = TF
-            btn1.isHidden = TF
-            btn2.isHidden = TF
             
             // change navi title
             navBar.topItem!.title = "사진 자르기"
@@ -223,10 +205,6 @@ class ViewController: UIViewController {
             enableTouch = true
         }else {
             rigthBtn.tag = 3
-            // button hidden
-            btn0.isHidden = TF
-            btn1.isHidden = TF
-            btn2.isHidden = TF
             
             // change navi title
             navBar.topItem!.title = "사진 crop / flip"
@@ -325,7 +303,7 @@ class ViewController: UIViewController {
         }
     }
     
-    func workCrop() {
+    func workCrop() { // 원본 이미지를 비율에 맞게 조절후 crop해줌 => Helper class 참고
         imageView.image = imageView.image(at: CGRect(x: recLeftTopX, y: recLeftTopY, width: recWidth, height: recHeight))
     }
 }
