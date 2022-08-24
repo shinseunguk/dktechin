@@ -5,6 +5,8 @@
 //  Created by ukBook on 2022/08/20.
 //
 
+//https://life-shelter.tistory.com/132
+
 import Foundation
 import UIKit
 
@@ -18,10 +20,38 @@ class ViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    // 초기 터치값
+    var recLeftTopX : CGFloat = 0.0
+    var recLeftTopY : CGFloat = 0.0
+    var recRightBottomX : CGFloat = 0.0
+    var recRightBottomY : CGFloat = 0.0
+    
+    // 이후 좌표값
+    var leftTopX : CGFloat = 0.0
+    var leftTopY : CGFloat = 0.0
+    var leftBottomX : CGFloat = 0.0
+    var leftBottomY : CGFloat = 0.0
+    var rightTopX : CGFloat = 0.0
+    var rightTopY : CGFloat = 0.0
+    var rightBottomX : CGFloat = 0.0
+    var rightBottomY : CGFloat = 0.0
+    
+    var recWidth : CGFloat = 0.0
+    var recHeight : CGFloat = 0.0
+    
     var touchIndex = 0
     
     var horizonIndex = 0
     var verticalIndex = 0
+    
+    var testView0 = UIView()
+    var testView1 = UIView()
+    var testView2 = UIView()
+    var testView3 = UIView()
+    var testView4 = UIView()
+    var testView5 = UIView()
+    var testView6 = UIView()
+    var testView7 = UIView()
     
     var leftMenuItem: UIBarButtonItem {
         let leftMenuItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(btnAction(_:)))
@@ -201,40 +231,88 @@ class ViewController: UIViewController {
             
             descriptionLabel.isHidden = true
             touchIndex = 0
+            
+            testView0.removeFromSuperview()
+            testView1.removeFromSuperview()
+            testView2.removeFromSuperview()
+            testView3.removeFromSuperview()
+            
+            testView4.removeFromSuperview()
+            testView5.removeFromSuperview()
+            testView6.removeFromSuperview()
+            testView7.removeFromSuperview()
+            descriptionLabel.text = "자르실 첫번째 모서리 터치"
         }
         
     }
     @objc func imageViewTouch(gestureRecognizer: UITapGestureRecognizer) {
         print(gestureRecognizer)
         if touchIndex < 2 {
-            if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
+            if touchIndex == 0 {
+                if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
+                        
+                    let location = gestureRecognizer.location(in: gestureRecognizer.view)
                     
-                let location = gestureRecognizer.location(in: gestureRecognizer.view)
-                print(gestureRecognizer.location(in: gestureRecognizer.view))
-                
-                let testView0 = UIView(frame: CGRect(x: location.x, y: location.y, width:  500, height: 2))
-                let testView1 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -500, height: 2))
-                let testView2 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 500))
-                let testView3 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -500))
-                
-                testView0.backgroundColor = UIColor.white
-                testView1.backgroundColor = UIColor.white
-                testView2.backgroundColor = UIColor.white
-                testView3.backgroundColor = UIColor.white
-                
-                self.imageView.addSubview(testView0)
-                self.imageView.addSubview(testView1)
-                self.imageView.addSubview(testView2)
-                self.imageView.addSubview(testView3)
-                
-                print("\(#line) ", location.x)
-                print("\(#line) ", location.y)
+                    testView0 = UIView(frame: CGRect(x: location.x, y: location.y, width:  5000, height: 2))
+                    testView1 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -5000, height: 2))
+                    testView2 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 5000))
+                    testView3 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -5000))
+                    
+                    testView0.backgroundColor = UIColor.white
+                    testView1.backgroundColor = UIColor.white
+                    testView2.backgroundColor = UIColor.white
+                    testView3.backgroundColor = UIColor.white
+                    
+                    self.imageView.addSubview(testView0)
+                    self.imageView.addSubview(testView1)
+                    self.imageView.addSubview(testView2)
+                    self.imageView.addSubview(testView3)
+                    
+                    recLeftTopX = location.x
+                    recLeftTopY = location.y
+                    
+                    descriptionLabel.text = "두번째 모서리 터치"
+                }
+            }else if touchIndex == 1 {
+                if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
+                        
+                    let location = gestureRecognizer.location(in: gestureRecognizer.view)
+                    
+                    testView4 = UIView(frame: CGRect(x: location.x, y: location.y, width:  5000, height: 2))
+                    testView5 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -5000, height: 2))
+                    testView6 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 5000))
+                    testView7 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -5000))
+                    
+                    testView4.backgroundColor = UIColor.white
+                    testView5.backgroundColor = UIColor.white
+                    testView6.backgroundColor = UIColor.white
+                    testView7.backgroundColor = UIColor.white
+                    
+                    self.imageView.addSubview(testView4)
+                    self.imageView.addSubview(testView5)
+                    self.imageView.addSubview(testView6)
+                    self.imageView.addSubview(testView7)
+                    
+                    recRightBottomX = location.x
+                    recRightBottomY = location.y
+                    
+                    print("recLeftTopX ",recLeftTopX)
+                    print("recLeftTopY ", recLeftTopY)
+                    print("recRightBottomX ",recRightBottomX)
+                    print("recRightBottomY ", recRightBottomY)
+                    
+                    recWidth = recRightBottomX - recLeftTopX
+                    recHeight = recRightBottomY - recLeftTopY
+                    
+                    print("recWidth ",recWidth) // 사각형 너비
+                    print("recHeight ", recHeight) // 사각형 높이
+                    
+//                    CGImage(width: <#T##Int#>, height: <#T##Int#>, bitsPerComponent: <#T##Int#>, bitsPerPixel: <#T##Int#>, bytesPerRow: <#T##Int#>, space: <#T##CGColorSpace#>, bitmapInfo: <#T##CGBitmapInfo#>, provider: <#T##CGDataProvider#>, decode: <#T##UnsafePointer<CGFloat>?#>, shouldInterpolate: <#T##Bool#>, intent: <#T##CGColorRenderingIntent#>)
+                    
+                }
             }
+            
             touchIndex += 1
-        }
-        
-        if touchIndex != 0 {
-            descriptionLabel.text = "두번째 모서리 터치"
         }
     }
 }
