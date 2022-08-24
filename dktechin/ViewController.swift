@@ -5,7 +5,7 @@
 //  Created by ukBook on 2022/08/20.
 //
 
-//https://life-shelter.tistory.com/132
+//https://myungji.dev/wiki/uiimage-crop/
 
 import Foundation
 import UIKit
@@ -20,6 +20,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    @IBOutlet weak var widthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     // 초기 터치값
     var recLeftTopX : CGFloat = 0.0
     var recLeftTopY : CGFloat = 0.0
@@ -39,10 +41,13 @@ class ViewController: UIViewController {
     var recWidth : CGFloat = 0.0
     var recHeight : CGFloat = 0.0
     
+    
     var touchIndex = 0
     
     var horizonIndex = 0
     var verticalIndex = 0
+    
+    var enableTouch : Bool = false
     
     var testView0 = UIView()
     var testView1 = UIView()
@@ -52,6 +57,10 @@ class ViewController: UIViewController {
     var testView5 = UIView()
     var testView6 = UIView()
     var testView7 = UIView()
+    
+    
+    
+    
     
     var leftMenuItem: UIBarButtonItem {
         let leftMenuItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(btnAction(_:)))
@@ -132,6 +141,7 @@ class ViewController: UIViewController {
             break
         case 4: // 카메라 클릭이후 체크 버튼 변경후 onclick method
             checkAction()
+            workCrop()
             break
         case 5: // button hidden false
             buttonHidden(TF: false)
@@ -214,6 +224,7 @@ class ViewController: UIViewController {
             imageView.isUserInteractionEnabled = true
             
             descriptionLabel.isHidden = false
+            enableTouch = true
         }else {
             rigthBtn.tag = 3
             // button hidden
@@ -241,79 +252,106 @@ class ViewController: UIViewController {
             testView5.removeFromSuperview()
             testView6.removeFromSuperview()
             testView7.removeFromSuperview()
+            
+            //label reset
             descriptionLabel.text = "자르실 첫번째 모서리 터치"
+            
+            enableTouch = false
         }
         
     }
     @objc func imageViewTouch(gestureRecognizer: UITapGestureRecognizer) {
-        print(gestureRecognizer)
-        if touchIndex < 2 {
-            if touchIndex == 0 {
-                if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
+        if enableTouch {
+            if touchIndex < 2 {
+                if touchIndex == 0 {
+                    if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
+                            
+                        let location = gestureRecognizer.location(in: gestureRecognizer.view)
                         
-                    let location = gestureRecognizer.location(in: gestureRecognizer.view)
-                    
-                    testView0 = UIView(frame: CGRect(x: location.x, y: location.y, width:  5000, height: 2))
-                    testView1 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -5000, height: 2))
-                    testView2 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 5000))
-                    testView3 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -5000))
-                    
-                    testView0.backgroundColor = UIColor.white
-                    testView1.backgroundColor = UIColor.white
-                    testView2.backgroundColor = UIColor.white
-                    testView3.backgroundColor = UIColor.white
-                    
-                    self.imageView.addSubview(testView0)
-                    self.imageView.addSubview(testView1)
-                    self.imageView.addSubview(testView2)
-                    self.imageView.addSubview(testView3)
-                    
-                    recLeftTopX = location.x
-                    recLeftTopY = location.y
-                    
-                    descriptionLabel.text = "두번째 모서리 터치"
-                }
-            }else if touchIndex == 1 {
-                if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
+                        testView0 = UIView(frame: CGRect(x: location.x, y: location.y, width:  5000, height: 2))
+                        testView1 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -5000, height: 2))
+                        testView2 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 5000))
+                        testView3 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -5000))
                         
-                    let location = gestureRecognizer.location(in: gestureRecognizer.view)
-                    
-                    testView4 = UIView(frame: CGRect(x: location.x, y: location.y, width:  5000, height: 2))
-                    testView5 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -5000, height: 2))
-                    testView6 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 5000))
-                    testView7 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -5000))
-                    
-                    testView4.backgroundColor = UIColor.white
-                    testView5.backgroundColor = UIColor.white
-                    testView6.backgroundColor = UIColor.white
-                    testView7.backgroundColor = UIColor.white
-                    
-                    self.imageView.addSubview(testView4)
-                    self.imageView.addSubview(testView5)
-                    self.imageView.addSubview(testView6)
-                    self.imageView.addSubview(testView7)
-                    
-                    recRightBottomX = location.x
-                    recRightBottomY = location.y
-                    
-                    print("recLeftTopX ",recLeftTopX)
-                    print("recLeftTopY ", recLeftTopY)
-                    print("recRightBottomX ",recRightBottomX)
-                    print("recRightBottomY ", recRightBottomY)
-                    
-                    recWidth = recRightBottomX - recLeftTopX
-                    recHeight = recRightBottomY - recLeftTopY
-                    
-                    print("recWidth ",recWidth) // 사각형 너비
-                    print("recHeight ", recHeight) // 사각형 높이
-                    
-//                    CGImage(width: <#T##Int#>, height: <#T##Int#>, bitsPerComponent: <#T##Int#>, bitsPerPixel: <#T##Int#>, bytesPerRow: <#T##Int#>, space: <#T##CGColorSpace#>, bitmapInfo: <#T##CGBitmapInfo#>, provider: <#T##CGDataProvider#>, decode: <#T##UnsafePointer<CGFloat>?#>, shouldInterpolate: <#T##Bool#>, intent: <#T##CGColorRenderingIntent#>)
-                    
+                        testView0.backgroundColor = UIColor.white
+                        testView1.backgroundColor = UIColor.white
+                        testView2.backgroundColor = UIColor.white
+                        testView3.backgroundColor = UIColor.white
+                        
+                        self.imageView.addSubview(testView0)
+                        self.imageView.addSubview(testView1)
+                        self.imageView.addSubview(testView2)
+                        self.imageView.addSubview(testView3)
+                        
+                        recLeftTopX = location.x
+                        recLeftTopY = location.y
+                        
+                        descriptionLabel.text = "두번째 대각선 모서리 터치"
+                    }
+                }else if touchIndex == 1 {
+                    if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
+                            
+                        let location = gestureRecognizer.location(in: gestureRecognizer.view)
+                        
+                        testView4 = UIView(frame: CGRect(x: location.x, y: location.y, width:  5000, height: 2))
+                        testView5 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -5000, height: 2))
+                        testView6 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 5000))
+                        testView7 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -5000))
+                        
+                        testView4.backgroundColor = UIColor.white
+                        testView5.backgroundColor = UIColor.white
+                        testView6.backgroundColor = UIColor.white
+                        testView7.backgroundColor = UIColor.white
+                        
+                        self.imageView.addSubview(testView4)
+                        self.imageView.addSubview(testView5)
+                        self.imageView.addSubview(testView6)
+                        self.imageView.addSubview(testView7)
+                        
+                        recRightBottomX = location.x
+                        recRightBottomY = location.y
+                        
+                        print("recLeftTopX ",recLeftTopX)
+                        print("recLeftTopY ", recLeftTopY)
+                        print("recRightBottomX ",recRightBottomX)
+                        print("recRightBottomY ", recRightBottomY)
+                        
+                        recWidth = recRightBottomX - recLeftTopX
+                        recHeight = recRightBottomY - recLeftTopY
+                        
+                        print("recWidth ", Int(recWidth)) // 사각형 너비
+                        print("recHeight ", Int(recHeight)) // 사각형 높이
+                    }
                 }
+                touchIndex += 1
             }
-            
-            touchIndex += 1
         }
+    }
+    
+    func workCrop() {
+//        let xOffset = (imageView.size.width - sideLength) / 2.0
+//        let yOffset = (sourceSize.height - sideLength) / 2.0
+        
+        print(imageView.frame.width) // 400
+        print((imageView.image?.size.width)!) // 800
+        
+        var divW = (imageView.image?.size.width)! / imageView.frame.width
+        var divH = (imageView.image?.size.height)! / imageView.frame.height
+        
+        print("divW....1 ",divW)
+        print("divH....1 ",divH)
+        
+        var asd = UIView(frame : CGRect(x: Int(recLeftTopX), y: Int(recLeftTopY), width: Int(recWidth), height: Int(recHeight)))
+        
+        asd.backgroundColor = .blue
+        
+//        let cropRect = CGRect(x: Int(recLeftTopX), y: Int(recLeftTopY), width: Int(recWidth), height: Int(recHeight))
+        let cropRect = CGRect(x: recLeftTopX * divW, y: recLeftTopY * divH, width: recWidth * divW, height: recHeight * divH)
+        let imageRef = imageView.image!.cgImage!.cropping(to: cropRect);
+        let newImage = UIImage(cgImage: imageRef!, scale: imageView.image!.scale, orientation: imageView.image!.imageOrientation)
+
+        imageView.image = newImage
+//        imageView.addSubview(asd)
     }
 }
 
@@ -321,11 +359,9 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         var newImage: UIImage? = nil // update 할 이미지
         
-        if let possibleImage = info[UIImagePickerController.InfoKey.editedImage] as? UIImage {
-                    newImage = possibleImage // 수정된 이미지가 있을 경우
-        } else if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
+       if let possibleImage = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
             newImage = possibleImage // 원본 이미지가 있을 경우
-        }
+       }
         
         imageView.translatesAutoresizingMaskIntoConstraints = false
         
@@ -333,6 +369,29 @@ extension ViewController : UIImagePickerControllerDelegate, UINavigationControll
         imageView.transform = CGAffineTransform(scaleX: 1, y: 1);
         horizonIndex = 0
         verticalIndex = 0
+        
+        var ahrt = (newImage?.size.width)! / 2
+        
+        print(ahrt)
+        
+        var divW = (newImage?.size.width)! / imageView.frame.width
+        var divH = (newImage?.size.height)! / imageView.frame.height
+        
+        print((newImage?.size.width)!)
+        print(imageView.frame.width)
+        print(div)
+        
+        print("ddd1", (newImage?.size.width)! / divW)
+        print("ddd2", (newImage?.size.width)! / divH)
+        
+        
+//        imageView.widthAnchor.constraint(equalToConstant: (newImage?.size.width)!).isActive = true
+//        imageView.heightAnchor.constraint(equalToConstant: (newImage?.size.height)!).isActive = true
+//        widthConstraint.constant = (newImage?.size.width)! / divW
+//        widthConstraint.isActive = true
+//
+//        heightConstraint.constant = (newImage?.size.height)! / divH
+//        heightConstraint.isActive = true
         
         self.imageView.image = newImage // 받아온 이미지를 update
         
