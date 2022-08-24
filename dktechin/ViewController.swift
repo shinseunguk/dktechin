@@ -18,6 +18,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var navBar: UINavigationBar!
     @IBOutlet weak var descriptionLabel: UILabel!
     
+    var touchIndex = 0
+    
     var horizonIndex = 0
     var verticalIndex = 0
     
@@ -194,25 +196,46 @@ class ViewController: UIViewController {
             navBar.topItem?.leftBarButtonItem = nil
             
             // change navi Item
-            rigthBtn.image = UIImage(systemName: "camera")
+            rigthBtn.image = UIImage(systemName: "camera.fill")
             view.backgroundColor = .white
             
             descriptionLabel.isHidden = true
+            touchIndex = 0
         }
         
     }
     @objc func imageViewTouch(gestureRecognizer: UITapGestureRecognizer) {
         print(gestureRecognizer)
-        if gestureRecognizer.state == UIGestureRecognizer.State.recognized
-                {
-                    let location = gestureRecognizer.location(in: gestureRecognizer.view)
-                    print(gestureRecognizer.location(in: gestureRecognizer.view))
+        if touchIndex < 2 {
+            if gestureRecognizer.state == UIGestureRecognizer.State.recognized {
                     
-                    let testView = UIView(frame: CGRect(x: location.x, y: location.y, width:  5, height: 5))
-                    testView.backgroundColor = UIColor.white
-                    self.imageView.addSubview(testView)
-        //            view.reloadInputViews()
-                }
+                let location = gestureRecognizer.location(in: gestureRecognizer.view)
+                print(gestureRecognizer.location(in: gestureRecognizer.view))
+                
+                let testView0 = UIView(frame: CGRect(x: location.x, y: location.y, width:  500, height: 2))
+                let testView1 = UIView(frame: CGRect(x: location.x, y: location.y, width:  -500, height: 2))
+                let testView2 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: 500))
+                let testView3 = UIView(frame: CGRect(x: location.x, y: location.y, width:  2, height: -500))
+                
+                testView0.backgroundColor = UIColor.white
+                testView1.backgroundColor = UIColor.white
+                testView2.backgroundColor = UIColor.white
+                testView3.backgroundColor = UIColor.white
+                
+                self.imageView.addSubview(testView0)
+                self.imageView.addSubview(testView1)
+                self.imageView.addSubview(testView2)
+                self.imageView.addSubview(testView3)
+                
+                print("\(#line) ", location.x)
+                print("\(#line) ", location.y)
+            }
+            touchIndex += 1
+        }
+        
+        if touchIndex != 0 {
+            descriptionLabel.text = "두번째 모서리 터치"
+        }
     }
 }
 
